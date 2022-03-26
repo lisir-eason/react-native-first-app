@@ -1,22 +1,43 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {createMaterialTopTabNavigator} from 'react-navigation-tabs';
-import {createAppContainer} from 'react-navigation';
+import {createAppContainer, NavigationEvents} from 'react-navigation';
 
 const PopularPage = () => {
+  const [tabNames, setTabNames] = useState([
+    'Java',
+    'JSX',
+    'IOS',
+    'Javascript',
+    'Python',
+    'GO',
+    'C++',
+  ]);
+
+  const _generateTabs = () => {
+    const tabs = {};
+    tabNames.forEach((item, index) => {
+      tabs[`tab${index}`] = {
+        screen: PopularTab,
+        navigationOptions: {
+          title: item,
+        },
+      };
+    });
+    return tabs;
+  };
+
   const TabNavigator = createAppContainer(
-    createMaterialTopTabNavigator({
-      PopularTab1: {
-        screen: PopularTab,
-        navigationOptions: {
-          title: 'Tab1',
+    createMaterialTopTabNavigator(_generateTabs(), {
+      tabBarOptions: {
+        tabStyle: styles.tabStyle,
+        upperCaseLabel: false,
+        scrollEnabled: true,
+        style: {
+          // backgroundColor: '#a67',
         },
-      },
-      PopularTab2: {
-        screen: PopularTab,
-        navigationOptions: {
-          title: 'Tab2',
-        },
+        indicatorStyle: styles.indicatorStyle,
+        labelStyle: styles.labelStyle,
       },
     }),
   );
@@ -41,6 +62,18 @@ export default PopularPage;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 30,
+    marginTop: 33,
+  },
+  tabStyle: {
+    minWidth: 50,
+  },
+  indicatorStyle: {
+    height: 2,
+    backgroundColor: 'white',
+  },
+  labelStyle: {
+    fontSize: 13,
+    marginTop: 6,
+    marginBottom: 6,
   },
 });

@@ -27,6 +27,8 @@ import {
 
 import TestComponent from './TestComponent';
 
+import Icon from 'react-native-vector-icons/Ionicons';
+
 const Section = ({children, title}) => {
   const isDarkMode = useColorScheme() === 'dark';
   return (
@@ -72,6 +74,7 @@ const App = () => {
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
           <TestComponent />
+          <Icon name="ios-person" size={30} color="#4F8EF7" />
           <Section title="Step One">
             Edit <Text style={styles.highlight}>App.js</Text> to 不错 this
             screen and then come back to see your edits.
